@@ -16,12 +16,6 @@ class Home extends Component {
       anuncios: []
     }
 
-    base.bindToState('categorias',
-    {
-      context: this,
-      state: 'categorias'
-    })
-
     base.bindToState('anuncios',
     {
       context: this,
@@ -32,23 +26,24 @@ class Home extends Component {
     })
   }
   render () {
-    let index = 0
+    //let index = 0
     return (
       <div>
         <HeaderHome />
         <div className='container'>
           <h3>Últimos anúncios</h3>
           <div className='row'>
-          {this.state.anuncios.map( (anuncio, index) => {
-              return (
-                <HomeAd key={index} anuncio={anuncio}/>,
-                ++index % 4 === 0 && <div key={'a-' + index} className='w-100'></div>
-              )
-            })}
+            {Object.keys(this.state.anuncios).map( key => {
+              const anuncio = this.state.anuncios[key]
+                return (
+                  <HomeAd key={key} anuncio={anuncio}/>
+                )
+              })
+            }
           </div>
           <h3>Categorias</h3>
           <div className='row'>
-            {this.state.categorias.map( (cat, index) => {
+            {this.props.categorias.map( (cat, index) => {
               return [
                 <CategoryHome key={index} categoria={cat}/>,
                 ++index % 4 === 0 && <div key={'c-' + index} className='w-100'></div>

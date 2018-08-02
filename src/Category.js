@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import { Link } from 'react-router-dom'
+
+import Advertisement from './HomeAd'
 
 class Category extends Component {
   constructor(props) {
@@ -34,7 +37,9 @@ class Category extends Component {
     return (
       <div>
         <h1>Categoria: {this.props.match.params.urlCategoria}</h1>
-        <p>{JSON.stringify(this.state.anuncios)}</p>
+        { Object.keys(this.state.anuncios).map( key => {
+          return (<Advertisement key={key} id={key} anuncio={ this.state.anuncios[key] } />) })
+        }
       </div>
     )
   }

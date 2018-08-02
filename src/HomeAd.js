@@ -1,17 +1,17 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const HomeAd = ({anuncio}) => {
+const HomeAd = ({id, anuncio}) => {
   return (
-    <div className='col-lg-4 col-md-6 mb-4'>
-      <div className='card h-100'>
-        <Link to={`/anuncios/ver/`}><img className='card-img-top' src={anuncio.foto} alt='' /></Link>
-        <div className='card-body'>
-          <h4 className='card-title'>
-            <Link to={`/anuncios/ver/`}>{anuncio.nome}</Link>
+    <div className=''>
+      <div className=''>
+        <Link to={`/anuncios/ver/${anuncio.categoria}/${id}`}><img className='' src={anuncio.foto} alt='' /></Link>
+        <div className=''>
+          <h4 className=''>
+            <Link to={`/anuncios/ver/${anuncio.categoria}/${id}`}>{anuncio.nome}</Link>
           </h4>
           <h5>{anuncio.preco}</h5>
-          <p className='card-text'>{anuncio.descricao}</p>
+          <p className=''>{anuncio.descricao}</p>
         </div>
       </div>
     </div>

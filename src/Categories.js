@@ -16,7 +16,7 @@ const Categorias = (props) => {
             cat => {
               return (
                 <li key={cat.url}>
-                  <Link to={`/categorias/${cat.url}`}>{cat.categoria}</Link>
+                  <Link  to={`/categorias/${cat.url}`}>{cat.categoria}</Link>
                 </li>
               )
             }
@@ -24,8 +24,12 @@ const Categorias = (props) => {
         </ul>
       </div>
       <div>
+<<<<<<< HEAD
           <Route exact path='/categorias/:urlCategoria' component={Category} />
           <Route path='/categorias/:urlCategoria/:idAnuncio' render={(props) =>  <Advertisement {...props} />} />
+=======
+          <Route path='/categorias/:urlCategoria' component={Category} />
+>>>>>>> parent of 6513334... Link advertisement
       </div>
     </div>
   )

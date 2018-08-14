@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 import logo2 from './logo2.png'
 
-const HeaderInterno = () => {
+const Header = () => {
   return (
     <nav className='navbar navbar-dark fixed-top bg-dark'>
       <div className='container'>
@@ -23,4 +23,4 @@ const HeaderInterno = () => {
   )
 }
 
-export default HeaderInterno
+export default Header

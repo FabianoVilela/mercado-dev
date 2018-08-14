@@ -3,8 +3,8 @@ import React, { Component } from 'react'
 
 import base from './base'
 import HomeAd from './HomeAd'
-import CategoryHome from './CategoryHome'
-import HeaderHome from './HeaderHome'
+import LinkCategory from './LinkCategory'
+import HeaderMain from './HeaderMain'
 
 
 class Home extends Component {
@@ -12,41 +12,40 @@ class Home extends Component {
     super(props)
     
     this.state = {
-      categorias: [],
-      anuncios: []
+      advertisements: []
     }
 
-    base.bindToState('anuncios',
+    base.bindToState('advertisements',
     {
       context: this,
-      state: 'anuncios',
+      state: 'advertisements',
       queries: {
         limitToLast: 3
       }
     })
   }
   render () {
-    //let index = 0
+    let index = 0
     return (
       <div>
-        <HeaderHome />
+        <HeaderMain />
         <div className='container'>
-          <h3>Últimos anúncios</h3>
+          <h3>Last advertisements</h3>
           <div className='row'>
-            {Object.keys(this.state.anuncios).map( key => {
-              const anuncio = this.state.anuncios[key]
+            {Object.keys(this.state.advertisements).map( key => {
+              const advertisement = this.state.advertisements[key]
                 return (
-                  <HomeAd key={key} anuncio={anuncio}/>
+                  <HomeAd key={key} id={key} advertisement={advertisement}/>
                 )
               })
             }
           </div>
-          <h3>Categorias</h3>
+          <h3>Categories</h3>
           <div className='row'>
-            {this.props.categorias.map( (cat, index) => {
+            {this.props.categories.map( (category, key) => {
               return [
-                <CategoryHome key={index} categoria={cat}/>,
-                ++index % 4 === 0 && <div key={'c-' + index} className='w-100'></div>
+                <LinkCategory key={key} category={category}/>,
+                ++index % 4 === 0 && <div key={'c-' + key} className='w-100'></div>
               ]
             })}
           </div>

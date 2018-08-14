@@ -10,8 +10,8 @@ class Advertisement extends Component {
             isLoading: true
         }
 
-        const id = this.props.match.params.idAnuncio
-        const url = `https://mercadodev-fvs.firebaseio.com/anuncios/${id}.json`
+        const id = this.props.match.params.idAdvertisement
+        const url = `https://mercadodev-fvs.firebaseio.com/advertisements/${id}.json`
         axios
             .get(url)
             .then(data => {
@@ -30,8 +30,8 @@ class Advertisement extends Component {
 
         return (
             <div>
-                <h1>{advertisement.nome}</h1>
-                <p><img src={advertisement.foto} alt={advertisement.nome}/></p>
+                <h1>{advertisement.name}</h1>
+                <p><img src={advertisement.photo} alt={advertisement.name}/></p>
             </div>
         )
     }

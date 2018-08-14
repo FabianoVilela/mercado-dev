@@ -1,59 +1,59 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import HomeAd from './HomeAd';
 
 class Category extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      anuncios: {},
+      advertisements: {},
       isLoading: false
     }
 
-    this.loadAnuncios = this.loadAnuncios.bind(this)
+    this.loadAdvertisements = this.loadAdvertisements.bind(this)
 
-    this.loadAnuncios(this.props.match.params.urlCategoria)
+    this.loadAdvertisements(this.props.match.params.urlCategory)
+    this.loadAdvertisements()
   }
 
-  loadAnuncios(urlCategoria) {
+  loadAdvertisements(urlCategory) {
     this.setState({ 
-      anuncios: {},
+      advertisements: {},
       isLoading: true
     })
 
-    const url = `https://mercadodev-fvs.firebaseio.com/anuncios.json?orderBy="categoria"&equalTo="${urlCategoria}"`
+    const url = `https://mercadodev-fvs.firebaseio.com/advertisements.json?orderBy="category"&equalTo="${urlCategory}"`
     axios.get(url).then(
       res => {
-        this.setState({ anuncios: res.data, isLoading: false })
-        this.categoria = this.props.match.params.urlCategoria
+        this.setState({ advertisements: res.data, isLoading: false })
+        this.category = this.props.match.params.urlCategory
       }
     )
   }
 
   componentWillReceiveProps(newProps) {
-    if(newProps.match.params.urlCategoria){
-      if(this.categoria !== newProps.match.params.urlCategoria)
-        this.loadAnuncios(newProps.match.params.urlCategoria)
+    if(newProps.match.params.urlCategory){
+      if(this.category !== newProps.match.params.urlCategory)
+        this.loadAdvertisements(newProps.match.params.urlCategory)
     }
   }
 
   render () {
     return (
       <div>
-<<<<<<< HEAD
+        <h1>Category: {this.props.match.params.urlCategory}</h1>
         { this.state.isLoading && <span>Loading...</span>}
         {
-          !this.state.isLoading && Object.keys(this.state.anuncios).length === 0 && <span>Nenhum produdo cadastrado</span>
+          !this.state.isLoading && Object.keys(this.state.advertisements).length === 0 && <span>No products</span>
         }
-        <div>
-          <h1>Categoria: {this.props.match.params.urlCategoria}</h1>
-          { Object.keys(this.state.anuncios).map( key => {
-            return (<Advertisement key={key} id={key} anuncio={ this.state.anuncios[key] } />) })
+        <div className='row'>
+          {
+            Object.keys(this.state.advertisements).map(_key => {
+              const advertisement = this.state.advertisements[_key]
+              return <HomeAd key={_key} id={_key} advertisement={advertisement} />
+            })
           }
         </div>
-=======
-        <h1>Categoria: {this.props.match.params.urlCategoria}</h1>
-        <p>{JSON.stringify(this.state.anuncios)}</p>
->>>>>>> parent of 6513334... Link advertisement
       </div>
     )
   }

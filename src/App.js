@@ -3,40 +3,31 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 
 import base from './base'
 import Home from './Home'
-import Categorias from './Categories'
-import NovoAnuncio from './NovoAnuncio'
+import Categories from './Categories'
+import NewAdvertisement from './NewAdvertisement'
 import Footer from './Footer'
 
 
 class App extends Component {
   constructor(props) {
     super(props)
+
     this.state = {
-      categorias: [],
-      anuncios: []
+      categories: []
     }
 
-    base.bindToState('categorias', {
+    base.bindToState('categories', {
       context: this,
-      state: 'categorias'
-    })
-
-    base.bindToState('anuncios',
-    {
-      context: this,
-      state: 'anuncios',
-      queries: {
-        limitToLast: 3
-      }
+      state: 'categories'
     })
   }
   render() {
     return (
       <Router>
         <div className='App'>
-          <Route path='/' exact render={() => <Home categorias={this.state.categorias}/>} />
-          <Route path='/novo-anuncio' exact render={() => <NovoAnuncio categorias={this.state.categorias} />} />
-          <Route path='/categorias' render={() => <Categorias categorias={this.state.categorias} />} />
+          <Route path='/' exact render={() => <Home categories={this.state.categories}/>} />
+          <Route path='/new' exact render={() => <NewAdvertisement categories={this.state.categories} />} />
+          <Route path='/categories' render={() => <Categories categories={this.state.categories} />} />
           <Footer />
         </div>
       </Router>

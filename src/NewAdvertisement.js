@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 
 import base, { storage } from './base'
-import HeaderInterno from './HeaderInterno'
+import Header from './Header'
 import { Redirect } from 'react-router-dom'
 
-class NovoAnuncio extends Component {
+class NewAdvertisement extends Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -14,21 +14,21 @@ class NovoAnuncio extends Component {
   }
   handleSubmit (e) {
     const file = this.refs.foto.files[0]
-    const { name, size } = file
+    const { name } = file
     const ref = storage.ref(name)
     ref.put(file).then(
       img => { 
-        const novoAnuncio = {
-          nome: this.refs.nome.value,
-          descricao: this.refs.descricao.value,
-          preco: this.refs.preco.value,
-          telefone: this.refs.telefone.value,
-          vendedor: this.refs.vendedor.value,
-          foto: img.metadata.downloadURLs[0],
-          categoria: this.refs.categoria.value
+        const newAdvertisement = {
+          name: this.refs.name.value,
+          description: this.refs.description.value,
+          price: this.refs.price.value,
+          telephone: this.refs.telephone.value,
+          seller: this.refs.vendedor.value,
+          photo: img.metadata.downloadURLs[0],
+          category: this.refs.category.value
         }
-        base.push('anuncios', {
-          data: novoAnuncio
+        base.push('advertisements', {
+          data: newAdvertisement
         })
         .then(() => {
           this.setState({ success: true })
@@ -41,43 +41,43 @@ class NovoAnuncio extends Component {
     return(
       <div>
         { this.state.success && <Redirect to='/' /> }
-        <HeaderInterno />
+        <Header />
         <div className='container mt-4'>
-          <h1>Novo anuncio</h1>
+          <h1>New advertisement</h1>
           <form onSubmit={this.handleSubmit}>
             <div className='form-group'>
               <label htmlFor='nome'>Foto</label>
               <input type='file' className='form-control' id='foto' ref='foto' />
             </div>      
             <div className='form-group'>
-                <label htmlFor='categoria'>Categorias</label>
-                <select className='form-control' id='categoria' ref='categoria' >
-                  {this.props.categorias.map( cat => 
+                <label htmlFor='category'>Categories</label>
+                <select className='form-control' id='category' ref='categoria' >
+                  {this.props.categories.map( cat => 
                       <option key={cat.url} value={cat.url}>{cat.categoria}</option> 
                   )}
                 </select>
             </div>   
             <div className='form-group'>
-              <label htmlFor='nome'>Nome</label>
+              <label htmlFor='nome'>Name</label>
               <input type='text' className='form-control' id='nome' ref='nome' />
             </div>
             <div className='form-group'>
-              <label htmlFor='nome'>Descrição</label>
-              <textarea className='form-control' id='descricao' ref='descricao' />
+              <label htmlFor='nome'>Description</label>
+              <textarea className='form-control' id='description' ref='description' />
             </div>
             <div className='form-group'>
-              <label htmlFor='preco'>Preço</label>
-              <input type='text' className='form-control' id='preco' ref='preco' />
+              <label htmlFor='price'>Price</label>
+              <input type='text' className='form-control' id='price' ref='price' />
             </div>
             <div className='form-group'>
-              <label htmlFor='telefone'>Telefone</label>
-              <input type='text' className='form-control' id='telefone' ref='telefone' />
+              <label htmlFor='telephone'>Telephone</label>
+              <input type='text' className='form-control' id='telephone' ref='telephone' />
             </div>
             <div className='form-group'>
-              <label htmlFor='vendedor'>Vendedor</label>
+              <label htmlFor='vendedor'>Seller</label>
               <input type='text' className='form-control' id='vendedor' ref='vendedor' />
             </div>
-            <button type="submit" className='btn btn-primary'>Salvar</button>
+            <button type="submit" className='btn btn-primary'>Save</button>
           </form>
         </div>
       </div>
@@ -85,4 +85,4 @@ class NovoAnuncio extends Component {
   }
 }
 
-export default NovoAnuncio
+export default NewAdvertisement

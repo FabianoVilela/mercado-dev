@@ -1,22 +1,22 @@
 import React from 'react'
 import { Route, Link } from 'react-router-dom'
 
-import HeaderInterno from './HeaderInterno';
+import Header from './Header';
 import Category from './Category'
 import Advertisement from './Advertisement'
 
-const Categorias = (props) => {
+const Categories = (props) => {
   return(
     <div>
-      <HeaderInterno />
-      <h1>Categorias</h1>
+      <Header />
+      <h1>Categories</h1>
       <div>
         <ul>
-          {props.categorias.map(
-            cat => {
+          {props.categories.map(
+            (category, key) => {
               return (
-                <li key={cat.url}>
-                  <Link  to={`/categorias/${cat.url}`}>{cat.categoria}</Link>
+                <li key={key}>
+                  <Link  to={`/categories/${category.url}`}>{category.name}</Link>
                 </li>
               )
             }
@@ -24,15 +24,11 @@ const Categorias = (props) => {
         </ul>
       </div>
       <div>
-<<<<<<< HEAD
-          <Route exact path='/categorias/:urlCategoria' component={Category} />
-          <Route path='/categorias/:urlCategoria/:idAnuncio' render={(props) =>  <Advertisement {...props} />} />
-=======
-          <Route path='/categorias/:urlCategoria' component={Category} />
->>>>>>> parent of 6513334... Link advertisement
+          <Route path='/categories/:urlCategory' exact component={Category} />
+          <Route path='/categories/:urlCategory/:idAdvertisement' render={(props) => <Advertisement {...props} />} />
       </div>
     </div>
   )
 }
 
-export default Categorias
+export default Categories

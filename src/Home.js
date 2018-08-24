@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-// import logo from './logo.svg'
+
+import { Grid, List } from 'semantic-ui-react'
 
 import base from './base'
 import HomeAd from './HomeAd'
@@ -29,27 +30,31 @@ class Home extends Component {
     return (
       <div>
         <HeaderMain />
-        <div className='container'>
-          <h3>Last advertisements</h3>
-          <div className='row'>
-            {Object.keys(this.state.advertisements).map( key => {
-              const advertisement = this.state.advertisements[key]
-                return (
-                  <HomeAd key={key} id={key} advertisement={advertisement}/>
-                )
-              })
-            }
-          </div>
-          <h3>Categories</h3>
-          <div className='row'>
-            {this.props.categories.map( (category, key) => {
-              return [
-                <LinkCategory key={key} category={category}/>,
-                ++index % 4 === 0 && <div key={'c-' + key} className='w-100'></div>
-              ]
-            })}
-          </div>
-        </div>
+        <Grid divided padded>
+          <Grid.Row>
+            <Grid.Column width={2}>
+              <h3>Categories</h3>
+              <List divided>
+                {this.props.categories.map( (category, key) => {
+                  return [
+                    <LinkCategory key={key} category={category}/>,
+                    ++index % 4 === 0 && <div key={'c-' + key}></div>
+                  ]
+                })}
+              </List>
+            </Grid.Column>
+            <Grid.Column width={14}>
+              <h3>Last advertisements</h3>
+              {Object.keys(this.state.advertisements).map( key => {
+                const advertisement = this.state.advertisements[key]
+                  return (
+                    <HomeAd key={key} id={key} advertisement={advertisement}/>
+                  )
+                })
+              }
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
       </div>
     )
   }

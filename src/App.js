@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { Container } from 'semantic-ui-react'
 
 import base from './base'
 import Home from './Home'
@@ -24,12 +25,12 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <div className='App'>
+        <Container fluid>
           <Route path='/' exact render={() => <Home categories={this.state.categories}/>} />
           <Route path='/new' exact render={() => <NewAdvertisement categories={this.state.categories} />} />
           <Route path='/categories' render={() => <Categories categories={this.state.categories} />} />
           <Footer />
-        </div>
+        </Container>
       </Router>
     )
   }

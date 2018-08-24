@@ -1,12 +1,14 @@
 import React from 'react' 
 import { Link } from 'react-router-dom'
+import { List } from 'semantic-ui-react'
 
 const LinkCategory = ({category}) => {
   return (
-    <Link to={`/categories/${category.url}`} className="btn btn-secondary h-100 m-2 col-sm">
-      <i className={`fas ${category.icon}`} aria-hidden="true"></i><br />
-      {category.name}
-    </Link>
+    <List.Item>
+      <Link to={`/categories/${category.url}`}>
+        {category.name}
+      </Link>
+    </List.Item>
   )
 }
 
